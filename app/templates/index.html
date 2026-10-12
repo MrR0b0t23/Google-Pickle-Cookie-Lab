@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>Build on Nimbus</h1>
+  <p>Guides, references and samples for the Nimbus cloud platform.</p>
+</section>
+<section class="cards">
+  {% for slug, d in docs.items() %}
+  <a class="card" href="{{ url_for('doc', slug=slug) }}">
+    <h3>{{ d.title }}</h3>
+    <p>{{ d.summary }}</p>
+  </a>
+  {% endfor %}
+</section>
+{% endblock %}

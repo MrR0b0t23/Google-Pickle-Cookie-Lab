@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in | Nimbus Accounts</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body class="idp">
+  <form class="idp-box" method="post">
+    <h1>&#9729; Nimbus Accounts</h1>
+    <p>Sign in to continue to <strong>Nimbus Developers</strong></p>
+    {% for key in ["client_id", "redirect_uri", "response_type", "scope", "state"] %}
+    <input type="hidden" name="{{ key }}" value="{{ params.get(key, '') }}">
+    {% endfor %}
+    <label>Email <input name="email" type="email" placeholder="you@example.com" required></label>
+    <label>Password <input name="password" type="password" placeholder="any password works"></label>
+    <button type="submit">Continue</button>
+    <p class="muted">Demo identity provider: any email and password are accepted.</p>
+  </form>
+</body>
+</html>

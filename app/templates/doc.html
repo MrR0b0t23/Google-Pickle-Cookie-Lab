@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}{{ page.title }} | Nimbus Developers{% endblock %}
+{% block content %}
+<article class="doc">
+  <h1>{{ page.title }}</h1>
+  <p class="lead">{{ page.summary }}</p>
+  {% for para in page.body %}<p>{{ para|safe }}</p>{% endfor %}
+</article>
+{% endblock %}

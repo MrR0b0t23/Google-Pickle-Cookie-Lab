@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="doc">
+  <h1>Admin console</h1>
+  <p class="flag">{{ flag }}</p>
+  <h2>Ops notes</h2>
+  <ul>
+    <li>Pods run the portal as an unprivileged user. The root filesystem is read-only; only <code>/tmp</code> and the search cache are writable.</li>
+    <li>The release flag for this build is stored in a file in the filesystem root of each pod. Nobody remembers its exact name.</li>
+    <li>Reminder: never paste session cookies into tickets. They contain more than you think.</li>
+  </ul>
+</article>
+{% endblock %}
