@@ -1,0 +1,30 @@
+# Pickled Cookie Lab
+#
+# This container is VULNERABLE TO REMOTE CODE EXECUTION ON PURPOSE.
+# By default it only listens on 127.0.0.1. To reach it from a VM, set
+# LAB_BIND_IP in .env to the host-side IP of the VM's virtual network
+# (see docs/NETWORKING.md). Never bind it to 0.0.0.0 on an untrusted network.
+
+services:
+  nimbus-docs:
+    build: ./app
+    image: pickled-cookie-lab:latest
+    container_name: pickled-cookie-lab
+    ports:
+      # 8888 by default: Burp and Caido both use 8080 in the attacker VM,
+      # and sharing the number makes proxy history confusing to read.
+      - "${LAB_BIND_IP:-127.0.0.1}:${LAB_PORT:-8888}:5000"
+    # Contain the blast radius: players get code execution as an
+    # unprivileged user in a read-only container with no capabilities.
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m
+      - /app/static/cache:size=8m,uid=1000,gid=1000,mode=0755
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    mem_limit: 256m
+    cpus: 1.0
+    restart: "no"
