@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block content %}
+Your account
+
+Name	{{ user.name }}
+Email	{{ user.email }}
+Role	{{ user.role }}
+Docs editors with the admin role can open the admin console.
+
+{% endblock %}
